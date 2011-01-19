@@ -21,7 +21,6 @@ package uk.co.soulwire.gui
 	import flash.geom.Point;
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
-	import flash.ui.Keyboard;
 
 	/**
 	 * @author justin

@@ -5,6 +5,15 @@
  *	
  *	@version 1.00 | Jan 13, 2011
  *	@author Justin Windle
+ *	
+ *	SimpleGUI is a single Class utility designed for AS3 projects where a developer needs to 
+ *	quickly add UI controls for variables or functions to a sketch. Properties can be controlled 
+ *	with just one line of code using a variety of components from the fantastic Minimal Comps set 
+ *	by Keith Peters, as well as custom components written for SimpleGUI such as the FileChooser
+ *	
+ *	Credit to Keith Peters for creating Minimal Comps which this class uses
+ *	http://www.minimalcomps.com/
+ *	http://www.bit-101.com/
  *  
  **/
  

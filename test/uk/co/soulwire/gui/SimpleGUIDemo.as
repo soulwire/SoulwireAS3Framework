@@ -48,7 +48,7 @@ package uk.co.soulwire.gui
 		public var amplitude : int = 140;
 		
 		public var waveColour : uint = 0xFFFFFF;
-		public var backgroundColour : uint = 0xF2F2F2;
+		public var backgroundColour : uint = 0xEAEAEA;
 		
 		// Noise options
 		
@@ -98,26 +98,26 @@ package uk.co.soulwire.gui
 		
 		protected function initGUI() : void
 		{
-			_gui = new SimpleGUI(this, "Example GUI", Keyboard.SPACE);
-
+			_gui = new SimpleGUI(this, "Example GUI", "C");
+			
 			_gui.addGroup("General Settings");
 			_gui.addColour("backgroundColour");
 			_gui.addButton("Randomise Circle Position", {callback:positionCircle, width:160});
 			_gui.addSaveButton();
-
+			
 			_gui.addColumn("Noise Options");
 			_gui.addSlider("noiseBase.x", 10, 200);			_gui.addSlider("noiseBase.y", 10, 200);
 			_gui.addSlider("noiseSeed", 1, 1000);
 			_gui.addSlider("noiseOctaves", 1, 4);
 			_gui.addSlider("turbulence.x", -10, 10);
 			_gui.addSlider("turbulence.y", -10, 10);
-
+			
 			_gui.addGroup("Wave Options");
 			_gui.addStepper("waveCount", 1, 20);
 			_gui.addStepper("waveSteps", 2, MAX_WAVE_STEPS);
 			_gui.addSlider("amplitude", 0, 200);
 			_gui.addColour("waveColour");
-
+			
 			_gui.addColumn("Circle Options");
 			_gui.addRange("minCircleSize", "maxCircleSize", 10, 120, {label:"Circle Size Range"});
 			_gui.addSlider("rotationSpeed", -10, 10);
@@ -134,6 +134,10 @@ package uk.co.soulwire.gui
 			]);
 			
 			_gui.addToggle("animateCircle");
+			
+			_gui.addColumn("Instructions:");
+			_gui.addLabel("Press 'C' to toggle GUI");			_gui.addLabel("Press 'S' to copy setup code to clipboard");
+			
 			_gui.show();
 		}
 

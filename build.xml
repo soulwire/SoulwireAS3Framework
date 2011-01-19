@@ -1,0 +1,63 @@
+<project name="Soulwire AS3 Framework">
+
+	<!-- settings -->
+	
+	<property name="sdk"	value="/Applications/FDT/plugins/com.powerflasher.fdt.shippedFlexSDK_4.1.0.16076/flex" />
+	<!--<property name="sdk"	value="/Applications/FDT/plugins/com.powerflasher.fdt.shippedFlexSDK4_4.0.0.14159_1000/flex" />-->
+	<property name="player"	value="/Applications/Adobe Flash CS5/Players/Debug/Flash Player Debugger.app" />
+
+	<property name="src"	value="${basedir}/src/" />
+	<property name="lib"	value="${basedir}/lib/" />
+	<property name="bin"	value="${basedir}/bin/" />
+	<property name="test"	value="${basedir}/test/" />
+	<property name="mxmlc"	value="${sdk}/bin/mxmlc" />
+	
+	<!-- tasks -->
+
+	<macrodef name="compile" description="Compile using MXMLC">
+		<attribute name="target" />
+		<attribute name="type" default="as" />
+		<attribute name="swf" default="${bin}/@{target}.swf" />
+		<sequential>
+			<exec executable="${mxmlc}" failonerror="true">
+				<arg value="-debug=true" />
+				<arg value="-source-path=${src}" />
+				<arg value="-source-path=${lib}" />
+				<arg value="-source-path=${test}" />
+				<arg value="-file-specs=${basedir}/@{target}.@{type}" />
+				<arg value="-static-link-runtime-shared-libraries=true" />
+				<arg value="-output=@{swf}" />
+			</exec>
+			<fdt.startDebugger targetswf="@{swf}" projectname="SoulwireAS3Framework" />
+			<exec failonerror="true" executable="open" vmlauncher="true" spawn="false">
+				<arg line="-a '${player}'" />
+				<arg line="@{swf}" />
+			</exec>
+		</sequential>
+	</macrodef>
+	
+	<!-- implementations -->
+	
+		<!-- uk.co.soulwire.display -->
+	
+		<target name="uk.co.soulwire.display.PaperSprite">
+			<compile target="test/uk/co/soulwire/display/PaperSpriteDemo"/>
+		</target>
+	
+		<!-- uk.co.soulwire.gui -->
+		
+		<target name="uk.co.soulwire.gui.SimpleGUI">
+			<compile target="test/uk/co/soulwire/gui/SimpleGUIDemo"/>
+		</target>
+	
+		<!-- uk.co.soulwire.util -->
+	
+		<target name="uk.co.soulwire.util.ColourUtil">
+			<compile target="test/uk/co/soulwire/util/ColourUtilDemo"/>
+		</target>
+	
+		<target name="uk.co.soulwire.util.StringUtil">
+			<compile target="test/uk/co/soulwire/util/StringUtilDemo"/>
+		</target>
+
+</project>

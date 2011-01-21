@@ -973,7 +973,7 @@ package uk.co.soulwire.gui
 
 		private function onKeyPressed(event : KeyboardEvent) : void
 		{
-			if(event.keyCode == hotKey.toUpperCase().charCodeAt(0))
+			if(hotKey && event.keyCode == hotKey.toUpperCase().charCodeAt(0))
 			{
 				_hidden ? show() : hide();
 			}

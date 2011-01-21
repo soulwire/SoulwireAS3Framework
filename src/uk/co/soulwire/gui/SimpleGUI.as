@@ -58,7 +58,7 @@ package uk.co.soulwire.gui
 		//	CONSTANTS
 		//	----------------------------------------------------------------
 		
-		public static const VERSION : Number = 1.0;
+		public static const VERSION : Number = 1.01;
 		
 		private static const TOOLBAR_HEIGHT : int = 13;
 		private static const COMPONENT_MARGIN : int = 8;		private static const COLUMN_MARGIN : int = 1;		private static const GROUP_MARGIN : int = 1;		private static const PADDING : int = 4;		private static const MARGIN : int = 1;
@@ -113,7 +113,7 @@ package uk.co.soulwire.gui
 			if (_target.stage) onAddedToStage(null);
 			else _target.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			this.hotKey = hotKey;
+			if(hotKey) this.hotKey = hotKey;
 			
 			addColumn(title);
 			addGroup();
@@ -131,10 +131,13 @@ package uk.co.soulwire.gui
 		public function show() : void
 		{
 			_lineV.visible = false;
-			
-			_stage.addChild(_container);
-			_stage.addChild(_toolbar);
-			_stage.addChild(_toggle);
+
+			if (_stage)
+			{
+				_stage.addChild(_container);
+				_stage.addChild(_toolbar);
+				_stage.addChild(_toggle);
+			}
 			
 			_hidden = false;
 		}
@@ -146,10 +149,13 @@ package uk.co.soulwire.gui
 		public function hide() : void
 		{
 			_lineV.visible = true;
-			
-			if (!_showToggle && _stage.contains(_toggle)) _stage.removeChild(_toggle);
-			if (_stage.contains(_container)) _stage.removeChild(_container);
-			if (_stage.contains(_toolbar)) _stage.removeChild(_toolbar);
+
+			if (_stage)
+			{
+				if (!_showToggle && _stage.contains(_toggle)) _stage.removeChild(_toggle);
+				if (_stage.contains(_container)) _stage.removeChild(_container);
+				if (_stage.contains(_toolbar)) _stage.removeChild(_toolbar);
+			}
 			
 			_hidden = true;
 		}
@@ -596,7 +602,7 @@ package uk.co.soulwire.gui
 		
 		private function initContextMenu() : void
 		{
-			var menu : ContextMenu = _target.contextMenu || new ContextMenu();
+			var menu : * = _target.contextMenu || new ContextMenu();
 			var item : ContextMenuItem = new ContextMenuItem("Toggle Controls", true);
 			
 			item.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuItemSelected);
@@ -652,7 +658,10 @@ package uk.co.soulwire.gui
 					}
 					else if (component is ComboBox)
 					{
-						target[prop] = component["selectedItem"].data;
+						if(component["selectedItem"])
+						{
+							target[prop] = component["selectedItem"].data;
+						}
 					}
 					else if(component.hasOwnProperty("value"))
 					{

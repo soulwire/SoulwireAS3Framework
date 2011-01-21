@@ -58,7 +58,7 @@ package uk.co.soulwire.gui
 		//	CONSTANTS
 		//	----------------------------------------------------------------
 		
-		public static const VERSION : Number = 1.01;
+		public static const VERSION : Number = 1.02;
 		
 		private static const TOOLBAR_HEIGHT : int = 13;
 		private static const COMPONENT_MARGIN : int = 8;		private static const COLUMN_MARGIN : int = 1;		private static const GROUP_MARGIN : int = 1;		private static const PADDING : int = 4;		private static const MARGIN : int = 1;
@@ -112,6 +112,8 @@ package uk.co.soulwire.gui
 			
 			if (_target.stage) onAddedToStage(null);
 			else _target.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+
+			_target.addEventListener(Event.ADDED, onTargetAdded);
 			
 			if(hotKey) this.hotKey = hotKey;
 			
@@ -131,13 +133,10 @@ package uk.co.soulwire.gui
 		public function show() : void
 		{
 			_lineV.visible = false;
-
-			if (_stage)
-			{
-				_stage.addChild(_container);
-				_stage.addChild(_toolbar);
-				_stage.addChild(_toggle);
-			}
+			
+			_target.addChild(_container);
+			_target.addChild(_toolbar);
+			_target.addChild(_toggle);
 			
 			_hidden = false;
 		}
@@ -150,12 +149,9 @@ package uk.co.soulwire.gui
 		{
 			_lineV.visible = true;
 
-			if (_stage)
-			{
-				if (!_showToggle && _stage.contains(_toggle)) _stage.removeChild(_toggle);
-				if (_stage.contains(_container)) _stage.removeChild(_container);
-				if (_stage.contains(_toolbar)) _stage.removeChild(_toolbar);
-			}
+			if (!_showToggle && _target.contains(_toggle)) _target.removeChild(_toggle);
+			if (_target.contains(_container)) _target.removeChild(_container);
+			if (_target.contains(_toolbar)) _target.removeChild(_toolbar);
 			
 			_hidden = true;
 		}
@@ -926,6 +922,11 @@ package uk.co.soulwire.gui
 			_stage = _target.stage;
 			_target.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			_target.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPressed);
+		}
+		
+		private function onTargetAdded(event : Event) : void
+		{
+			if (!_hidden) show();
 		}
 		
 		private function onSaveButtonClicked(event : MouseEvent) : void

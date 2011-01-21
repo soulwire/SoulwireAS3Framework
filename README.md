@@ -2,11 +2,9 @@
 Soulwire AS3 Framework
 -----
 
-A set of AS3 Classes
-
 ###Classes
 ####uk.co.soulwire.gui.SimpleGUI
-[View Demo](http://blog.soulwire.co.uk/)
+[View Demo](http://blog.soulwire.co.uk/code/actionscript-3/simple-flash-prototype-gui-tool/)
 
 A tool for fast prototyping and class demos in Flash.
 Quickly create a GUI (based on Keith Peter's [Minimal Comps](http://www.minimalcomps.com/)) to control variables in a sketch.

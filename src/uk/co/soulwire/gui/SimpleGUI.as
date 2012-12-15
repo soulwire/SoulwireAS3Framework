@@ -61,7 +61,11 @@ package uk.co.soulwire.gui
 		public static const VERSION : Number = 1.02;
 		
 		private static const TOOLBAR_HEIGHT : int = 13;
-		private static const COMPONENT_MARGIN : int = 8;		private static const COLUMN_MARGIN : int = 1;		private static const GROUP_MARGIN : int = 1;		private static const PADDING : int = 4;		private static const MARGIN : int = 1;
+		private static const COMPONENT_MARGIN : int = 8;
+		private static const COLUMN_MARGIN : int = 1;
+		private static const GROUP_MARGIN : int = 1;
+		private static const PADDING : int = 4;
+		private static const MARGIN : int = 1;
 		
 		//	----------------------------------------------------------------
 		//	PRIVATE MEMBERS
@@ -74,10 +78,12 @@ package uk.co.soulwire.gui
 		private var _active : Component;
 		private var _stage : Stage;
 		
-		private var _toolbar : Sprite = new Sprite();		private var _message : Label = new Label();
+		private var _toolbar : Sprite = new Sprite();
+		private var _message : Label = new Label();
 		private var _version : Label = new Label();
 		private var _toggle : Sprite = new Sprite();
-		private var _lineH : Bitmap = new Bitmap();		private var _lineV : Bitmap = new Bitmap();
+		private var _lineH : Bitmap = new Bitmap();
+		private var _lineV : Bitmap = new Bitmap();
 		private var _tween : Number = 0.0;
 		private var _width : Number = 0.0;
 		
@@ -299,7 +305,7 @@ package uk.co.soulwire.gui
 			
 			_group = new Sprite();
 			_column.addChild(_group);
-
+			
 			if (title)
 			{
 				addLabel(title.toUpperCase());
@@ -312,9 +318,9 @@ package uk.co.soulwire.gui
 		 * @param text The text content of the label
 		 */
 		
-		public function addLabel(text : String) : void
+		public function addLabel(text : String) : Label
 		{
-			addControl(Label, {text : text.toUpperCase()});
+			return addControl(Label, {text : text.toUpperCase()}) as Label;
 		}
 		
 		/**
@@ -329,7 +335,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addToggle(target : String, options : Object = null) : void
+		public function addToggle(target : String, options : Object = null) : CheckBox
 		{
 			options = parseOptions(target, options);
 			
@@ -337,10 +343,10 @@ package uk.co.soulwire.gui
 			
 			params.target = target;
 			
-			addControl(CheckBox, merge(params, options));
+			return addControl(CheckBox, merge(params, options)) as CheckBox;
 		}
 		
-		public function addButton(label : String, options : Object = null) : void
+		public function addButton(label : String, options : Object = null) : PushButton
 		{
 			options = parseOptions(label, options);
 			
@@ -348,7 +354,7 @@ package uk.co.soulwire.gui
 
 			params.label = label;
 			
-			addControl(PushButton, merge(params, options));
+			return addControl(PushButton, merge(params, options)) as PushButton;
 		}
 		
 		/**
@@ -365,7 +371,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addSlider(target : String, minimum : Number, maximum : Number, options : Object = null) : void
+		public function addSlider(target : String, minimum : Number, maximum : Number, options : Object = null) : HUISlider
 		{
 			options = parseOptions(target, options);
 			
@@ -375,7 +381,7 @@ package uk.co.soulwire.gui
 			params.minimum = minimum;
 			params.maximum = maximum;
 			
-			addControl(HUISlider, merge(params, options));
+			return addControl(HUISlider, merge(params, options)) as HUISlider;
 		}
 		
 		/**
@@ -392,7 +398,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addRange(target1 : String, target2 : String, minimum : Number, maximum : Number, options : Object = null) : void
+		public function addRange(target1 : String, target2 : String, minimum : Number, maximum : Number, options : Object = null) : HUIRangeSlider
 		{
 			var target : Array = [target1, target2];
 			
@@ -404,7 +410,7 @@ package uk.co.soulwire.gui
 			params.minimum = minimum;
 			params.maximum = maximum;
 			
-			addControl(HUIRangeSlider, merge(params, options));
+			return addControl(HUIRangeSlider, merge(params, options)) as HUIRangeSlider;
 		}
 		
 		/**
@@ -421,7 +427,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addStepper(target : String, minimum : Number, maximum : Number, options : Object = null) : void
+		public function addStepper(target : String, minimum : Number, maximum : Number, options : Object = null) : NumericStepper
 		{
 			options = parseOptions(target, options);
 			
@@ -431,7 +437,7 @@ package uk.co.soulwire.gui
 			params.minimum = minimum;
 			params.maximum = maximum;
 			
-			addControl(NumericStepper, merge(params, options));
+			return addControl(NumericStepper, merge(params, options)) as NumericStepper;
 		}
 		
 		/**
@@ -446,7 +452,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addColour(target : String, options : Object = null) : void
+		public function addColour(target : String, options : Object = null) : ColorChooser
 		{
 			options = parseOptions(target, options);
 			
@@ -455,7 +461,7 @@ package uk.co.soulwire.gui
 			params.target = target;
 			params.usePopup = true;
 			
-			addControl(ColorChooser, merge(params, options));
+			return addControl(ColorChooser, merge(params, options)) as ColorChooser;
 		}
 		
 		/**
@@ -472,7 +478,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addComboBox(target : String, items : Array, options : Object = null) : void
+		public function addComboBox(target : String, items : Array, options : Object = null) : StyledCombo
 		{
 			options = parseOptions(target, options);
 			
@@ -486,7 +492,7 @@ package uk.co.soulwire.gui
 			params.defaultLabel = targ[prop];
 			params.numVisibleItems = Math.min(items.length, 5);
 			
-			addControl(StyledCombo, merge(params, options));
+			return addControl(StyledCombo, merge(params, options)) as StyledCombo;
 		}
 		
 		/**
@@ -504,7 +510,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addFileChooser(label : String, file : FileReference, onComplete : Function, filter : Array = null, options : Object = null) : void
+		public function addFileChooser(label : String, file : FileReference, onComplete : Function, filter : Array = null, options : Object = null) : FileChooser
 		{
 			options = parseOptions(label, options);
 			
@@ -516,7 +522,7 @@ package uk.co.soulwire.gui
 			params.filter = filter;
 			params.onComplete = onComplete;
 			
-			addControl(FileChooser, merge(params, options));
+			return addControl(FileChooser, merge(params, options)) as FileChooser;
 		}
 		
 		/**
@@ -533,7 +539,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addSaveButton(label : String = "Save", options : Object = null) : void
+		public function addSaveButton(label : String = "Save", options : Object = null) : PushButton
 		{
 			addGroup("Save Current Settings (S)");
 			
@@ -545,6 +551,7 @@ package uk.co.soulwire.gui
 			
 			var button : PushButton = addControl(PushButton, merge(params, options)) as PushButton;
 			button.addEventListener(MouseEvent.CLICK, onSaveButtonClicked);
+			return button;
 		}
 		
 		//	----------------------------------------------------------------
@@ -587,13 +594,17 @@ package uk.co.soulwire.gui
 			
 			//
 
-			_lineH.bitmapData = new BitmapData(5, 1, false, 0xFFFFFF);			_lineV.bitmapData = new BitmapData(1, 5, false, 0xFFFFFF);
+			_lineH.bitmapData = new BitmapData(5, 1, false, 0xFFFFFF);
+			_lineV.bitmapData = new BitmapData(1, 5, false, 0xFFFFFF);
 
-			_lineH.x = (TOOLBAR_HEIGHT * 0.5) - 3;			_lineH.y = (TOOLBAR_HEIGHT * 0.5) - 1;
+			_lineH.x = (TOOLBAR_HEIGHT * 0.5) - 3;
+			_lineH.y = (TOOLBAR_HEIGHT * 0.5) - 1;
 
-			_lineV.x = (TOOLBAR_HEIGHT * 0.5) - 1;			_lineV.y = (TOOLBAR_HEIGHT * 0.5) - 3;
+			_lineV.x = (TOOLBAR_HEIGHT * 0.5) - 1;
+			_lineV.y = (TOOLBAR_HEIGHT * 0.5) - 3;
 
-			_toggle.addChild(_lineH);			_toggle.addChild(_lineV);
+			_toggle.addChild(_lineH);
+			_toggle.addChild(_lineV);
 		}
 		
 		private function initContextMenu() : void
@@ -630,7 +641,8 @@ package uk.co.soulwire.gui
 		{
 			var i : int;
 			var path : String;
-			var prop : Object;			var target : Object;
+			var prop : Object;
+			var target : Object;
 			var targets : Array;
 			var options : Object = _parameters[component];
 			
@@ -677,7 +689,9 @@ package uk.co.soulwire.gui
 			var i : int;
 			var j : int;
 			var path : String;
-			var prop : Object;			var target : Object;			var targets : Array;
+			var prop : Object;
+			var target : Object;
+			var targets : Array;
 			var options : Object;
 			var component : Component;
 			

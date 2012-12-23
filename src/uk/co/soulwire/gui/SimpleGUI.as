@@ -1,4 +1,3 @@
-
 /**		
  * 
  *	uk.co.soulwire.gui.SimpleGUI
@@ -492,7 +491,7 @@ package uk.co.soulwire.gui
 			params.defaultLabel = targ[prop];
 			params.numVisibleItems = Math.min(items.length, 5);
 			
-			return addControl(StyledCombo, merge(params, options)) as StyledCombo;
+			return addControl(ComboBox, merge(params, options)) as StyledCombo;
 		}
 		
 		/**
@@ -566,6 +565,11 @@ package uk.co.soulwire.gui
 			Style.LABEL_TEXT = 0xEEEEEE;
 			Style.BUTTON_FACE = 0x555555;
 			Style.DROPSHADOW = 0x000000;
+
+			Style.LIST_DEFAULT = 0x333333;
+			Style.LIST_ALTERNATE = 0x444444;
+			Style.LIST_SELECTED = 0x111111;
+			Style.LIST_ROLLOVER = 0x555555;
 		}
 		
 		private function initToolbar() : void
@@ -1187,17 +1191,4 @@ internal class FileChooser extends Component
 		}
 	}
 	
-}
-
-internal class StyledCombo extends ComboBox
-{
-	override protected function addChildren() : void
-	{
-		super.addChildren();
-
-		_list.defaultColor = 0x333333;
-		_list.alternateColor = 0x444444;
-		_list.selectedColor = 0x111111;
-		_list.rolloverColor = 0x555555;
-	}
 }

@@ -477,7 +477,7 @@ package uk.co.soulwire.gui
 		 * you instead pass the label as a property within the options object
 		 */
 		
-		public function addComboBox(target : String, items : Array, options : Object = null) : StyledCombo
+		public function addComboBox(target : String, items : Array, options : Object = null) : ComboBox
 		{
 			options = parseOptions(target, options);
 			
@@ -491,7 +491,7 @@ package uk.co.soulwire.gui
 			params.defaultLabel = targ[prop];
 			params.numVisibleItems = Math.min(items.length, 5);
 			
-			return addControl(ComboBox, merge(params, options)) as StyledCombo;
+			return addControl(ComboBox, merge(params, options)) as ComboBox;
 		}
 		
 		/**
